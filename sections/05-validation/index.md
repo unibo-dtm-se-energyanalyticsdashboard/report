@@ -42,7 +42,7 @@ My automated testing strategy is divided into three distinct levels, as defined 
 * **Description:** This level tests the *orchestration* of multiple components working together, as defined in the Hexagonal Architecture (Design section). We test that the "Application Service" (`pipeline.py`) correctly interacts with its "Ports" (the adapters).
 * **Implementation (`tests/test_pipeline_smoke.py`):**
     * **Rationale:** This test validates the *entire* `run_pipeline` function (our Application Service) without the cost or instability of real network calls or a live database.
-    * **Test Doubles (Mocks):** This test relies heavily on **Test Doubles** (specifically, **Mocks** using `unittest.mock.patch`), as covered in `04-qa-tdd.pdf`. We "patch out" (replace) all external infrastructure:
+    * **Test Doubles (Mocks):** This test relies heavily on **Test Doubles** (specifically, **Mocks** using `unittest.mock.patch`). We "patch out" (replace) all external infrastructure:
         * `@patch("edas.pipeline.get_engine")`: Replaces the real database engine with a **Fake Engine** (`_FakeEngine`).
         * `@patch("edas.pipeline._load_countries")`: Replaces the database call with a hardcoded dictionary.
         * `@patch("edas.pipeline.fetch_consumption")`: Replaces the ENTSO-E API call with a simple function returning a dummy DataFrame.
