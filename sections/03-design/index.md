@@ -10,8 +10,7 @@ nav_order: 4
 
 #### Architectural Style
 
-The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**), as discussed in the course slides (`[Unit-03.1]`).
-
+The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**).
 **Justification (Why):**
 The primary goal of this project is to create a system that is decoupled from its external infrastructure (like the specific ENTSO-E API or the PostgreSQL database). A Hexagonal Architecture was chosen because it achieves this decoupling, which directly satisfies our key non-functional requirements:
 
