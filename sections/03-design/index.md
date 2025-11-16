@@ -83,11 +83,11 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
     This asynchronous, database-centric communication pattern ensures high availability; the dashboard can still serve data even if the ingestion pipeline is temporarily down.
 
 * **Interaction Patterns (UML Sequence Diagrams):**
-* 
+  
 <img width="3693" height="2986" alt="Untitled diagram-2025-11-16-112431" src="https://github.com/user-attachments/assets/853c6eff-1c9c-450d-99ad-8831e0c841dd" />
 
 
-    **Dashboard (`edas-dashboard`):** This diagram shows the flow when the Energy Analyst loads the dashboard or changes a filter.
+* **Dashboard (`edas-dashboard`):** This diagram shows the flow when the Energy Analyst loads the dashboard or changes a filter.
 
   <img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/ec3318ba-eae3-41df-af29-33f1ed239347" />
    
