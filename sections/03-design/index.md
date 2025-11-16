@@ -10,7 +10,7 @@ nav_order: 4
 
 #### Architectural Style
 
-The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**).
+The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**), as discussed in the course slides (`[Unit-03.1]`).
 
 **Justification (Why):**
 The primary goal of this project is to create a system that is decoupled from its external infrastructure (like the specific ENTSO-E API or the PostgreSQL database). A Hexagonal Architecture was chosen because it achieves this decoupling, which directly satisfies our key non-functional requirements:
@@ -68,7 +68,7 @@ The system is composed of the following infrastructural components:
 
 #### Object-Oriented Modelling (UML Class Diagram)
 
-<img width="1818" height="1504" alt="Untitled diagram-2025-11-16-102830" src="https://github.com/user-attachments/assets/04a709e5-5f27-40bb-8354-d036798fe55b" />
+<img width="1818" height="1504" alt="Untitled diagram-2025-11-16-102830" src="https://github.com/user-attachments/assets/bcb048be-d4e3-43f9-bc5a-e42b12c1edd5" />
 
 
 This diagram shows the main data entities (based on `01_schema.sql`) and their "1-to-N" relationships.
@@ -83,14 +83,14 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
     This asynchronous, database-centric communication pattern ensures high availability; the dashboard can still serve data even if the ingestion pipeline is temporarily down.
 
 * **Interaction Patterns (UML Sequence Diagrams):**
-  
-<img width="3693" height="2986" alt="Untitled diagram-2025-11-16-112431" src="https://github.com/user-attachments/assets/853c6eff-1c9c-450d-99ad-8831e0c841dd" />
+
+<img width="3693" height="2986" alt="Untitled diagram-2025-11-16-112431" src="https://github.com/user-attachments/assets/1cfdc271-f7cc-41fd-81b7-ae197c4bc6fd" />
 
 
 * **Dashboard (`edas-dashboard`):** This diagram shows the flow when the Energy Analyst loads the dashboard or changes a filter.
 
-<img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/ec3318ba-eae3-41df-af29-33f1ed239347" />
-   
+<img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/c773a7d4-4ac0-43ad-b8ec-1b1c076a2c90" />
+
 ---
 
 ### Behaviour
@@ -116,77 +116,3 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
 * **Concurrency:**
     * **Concurrent Writes:** Handled atomically by the `INSERT ON CONFLICT` (Upsert) mechanism in `upsert.py`. This ensures that even if two pipelines run simultaneously, data integrity is maintained (Idempotency, **NFR1**).
     * **Concurrent Reads:** Handled by PostgreSQL's standard MVCC (Multiversion Concurrency Control). Analysts reading the dashboard will not block the ingestion pipeline.
-- Are there **infrastructural components** that need to be introduced? Which and **how many** of each?
-    - e.g. **clients**, **servers**, **load balancers**, **caches**, **databases**, **message brokers**, **queues**, **workers**, **proxies**, **firewalls**, **CDNs**, etc.
-- How do components **distribute** over the network? **Where** are they located?
-    - e.g. do servers / brokers / databases / etc. sit on the same machine? on the same network? on the same datacenter? on the same continent?
-- How do components **find** each other?
-    - How to **name** components?
-    - e.g. **DNS**, **service discovery**, **load balancing**, etc.
-
-> UML deployment diagrams are welcome here
-
-## Modelling
-
-### Domain driven design (DDD) modelling
-
-- Which are the bounded contexts of your domain? 
-- Which are domain concepts (entities, value objects, aggregates, etc.) for each context?
-- Are there repositories, services, or factories for each/any domain concept?
-- What are the relavant domain events in each context?
-
-> Context map diagrams are welcome here
-
-### Object-oriented modelling
-
-- What are the main data types (e.g. classes) of the system?
-- What are the main attributes and methods of each data type?
-- How do data types relate to each other?
-
-> UML class diagrams are welcome here
-
-### In case of a distributed system
-
-- How do the domain concepts map to the architectural or infrastuctural components?
-    + i.e. which architectural/component is responsible for which domain concept?
-    + are there data types which are required onto multiple components? (e.g. messages being exchanged between components)
-
-- What are the domain concepts or data types which represent the state of the distributed system?
-    + e.g. state of a video game on central server, while inputs/representations on clients
-    + e.g. where to store messages in an instant-messaging app? for how long?
-
-- Are there domain concepts or data types which represent messages being exchanged between components?
-    + e.g. messages between clients and servers, messages between servers, messages between clients
-
-## Interaction
-
-- How do components *communicate*? *When*? *What*?
-
-- Which **interaction patterns** do they enact?
-
-> UML sequence diagrams are welcome here
-
-## Behaviour
-
-- How does **each** component *behave* individually (e.g., in *response* to *events* or messages)?
-    + Some components may be *stateful*, others *stateless*
-
-- Which components are in charge of updating the **state** of the system? *When*? *How*?
-
-> UML state diagrams or activity diagrams are welcome here
-
-## Data-related aspects (in case persistent storage is needed)
-
-- Is there any data that needs to be stored?
-    - *What* data? *Where*? *Why*?
-
-- How should **persistent data** be **stored**? Why?
-    - e.g., relations, documents, key-value, graph, etc.
-
-- Which components perform queries on the database?
-    - *When*? *Which* queries? *Why*?
-    - Concurrent read? Concurrent write? Why?
-
-- Is there any data that needs to be shared between components?
-    - *Why*? *What* data?
-
