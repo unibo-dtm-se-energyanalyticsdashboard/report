@@ -15,7 +15,7 @@ This project was managed entirely using Git and GitHub.
     * `dev`: This branch serves as the main integration branch for all new features.
     * `feature/*` (e.g., `feature/tests-logging`, `feature/document`): All new work, bug fixes, or documentation changes were developed in these isolated branches before being merged into `dev` via Pull Requests.
 * **Commit Convention:** We strictly follow the **Conventional Commits** standard (e.g., `feat:`, `fix:`, `docs:`, `chore(release):`).
-    * **Justification:** This standard is essential as it is directly used by our `semantic-release` tool (configured in `release.config.mjs`) to automatically determine the next version number (SemVer) and automatically generate the `CHANGELOG.md`.
+    * **Justification:** This standard is essential as it is directly used by our `semantic-release` tool (configured in `release.config.mjs`).
 * **Pull Requests (PRs) & Code Reviews:** All `feature` branches were merged into `dev` (and `dev` into `master`) via Pull Requests on GitHub.
     * **Merge Strategy:** We adopted the **"Squash and merge"** strategy. This convention is critical: it ensures that a single, meaningful Conventional Commit message enters the main branch, which in turn allows `semantic-release` to function correctly and maintain a clean, readable history.
 
