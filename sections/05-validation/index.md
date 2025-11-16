@@ -32,7 +32,7 @@ My automated testing strategy is divided into three distinct levels, as defined 
         * `test_last_10_days_dynamic_now`: Verifies the default (`last_10_days`) mode correctly calculates a dynamic 10-day window relative to the current time. (Covers **FR1, FR2, FR3**).
         * `test_full_2025_range`: Verifies the project-specific (`full_2025`) mode returns the exact, hardcoded start and end timestamps for the 2025 calendar year. (Covers **FR1, FR2, FR3**).
         * `test_invalid_mode_raises`: Verifies that the function fails fast by raising a `ValueError` if an unknown mode is supplied. (Covers **NFR3**).
-* **Future Work (Missing Tests):** A more comprehensive unit test suite (as discussed in `04-qa-tdd.pdf`) would also include isolated tests for:
+* **Future Work (Missing Tests):** A more comprehensive unit test suite would also include isolated tests for:
     * `entsoe_client.py` -> `to_utc_naive()` to validate timestamp conversions.
     * `entsoe_client.py` -> `_flatten_columns()` to validate the DataFrame transformation logic.
     * `upsert.py` -> Mocking the `raw_conn` and `pg_extras` to verify that the correct SQL and data tuples are generated, without touching a database.
