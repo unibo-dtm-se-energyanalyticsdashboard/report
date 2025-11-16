@@ -8,7 +8,7 @@ nav_order: 6
 
 ### Testing Approach
 
-My testing strategy was not a strict "Test-Driven Development (TDD)" approach, as the core features were implemented first. Instead, I followed a **Test-After Development** methodology, which is crucial for validation and ensuring long-term maintainability (as discussed in `04-qa-tdd.pdf`).
+My testing strategy was not a strict "Test-Driven Development (TDD)" approach, as the core features were implemented first. Instead, I followed a **Test-After Development** methodology, which is crucial for validation and ensuring long-term maintainability.
 
 The goal was to create a "safety net" of tests that validate the system at different levels, allowing for safe refactoring and future development.
 
