@@ -6,23 +6,116 @@ nav_order: 4
 
 # Design
 
-This chapter explains the strategies used to meet the requirements identified in the analysis. 
+### Architecture
 
-Ideally, the design should be the same, regardless of the technological choices made during the implementation phase.
+#### Architectural Style
 
-> You can re-order the sections as you prefer, but all the sections must be present in the end
+The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**), as discussed in the course slides (`[Unit-03.1]`).
 
-## Architecture 
+**Justification (Why):**
+The primary goal of this project is to create a system that is decoupled from its external infrastructure (like the specific ENTSO-E API or the PostgreSQL database). A Hexagonal Architecture was chosen because it achieves this decoupling, which directly satisfies our key non-functional requirements:
 
-- Which architectural style (e.g. layered, object-based, event-based, shared dataspace)? Why? Why not the others?
-- Provide details about the actual architecture (e.g. N-tier, hexagonal, etc.) you are going to adopt. Motivate your choice.
-- Provide a high-level overview of the architecture, possibly with a diagram
-- Describe the responsibilities of each architectural component
+1.  **Testability (NFR6):** It allows us to test the core logic (`pipeline.py`) in isolation by mocking the database (`upsert.py`) and the API (`entsoe_client.py`), as demonstrated in `tests/test_pipeline_smoke.py`.
+2.  **Maintainability (NFR5):** If the external API changes, we only need to update the `entsoe_client.py` adapter, without touching the core `pipeline.py` logic.
 
-> UML Components diagrams are welcome here
+#### High-Level Architecture Overview
 
-## Infrastructure (mostly applies to distributed systems)
+The system is designed with a clear separation between the "Core Application" and the "Adapters" that interact with the outside world.
 
+* **Core Application (The "Hexagon"):** This is the business logic, implemented in `src/edas/pipeline.py`. It acts as an **Application Service** that orchestrates the entire data flow.
+* **Ports (The "Interfaces"):** These are the contracts. In our Python implementation, they are *implicitly* defined by the function signatures that the core pipeline expects:
+    * An "Energy Client Port" (expecting `fetch_consumption`, `fetch_production`).
+    * An "Energy Repository Port" (expecting `upsert_energy_consumption`, `upsert_cross_border_flow`).
+* **Adapters (The "Implementation"):** These are the concrete tools that implement the ports.
+    * **Primary Adapters (Drivers):** `src/edas/cli.py` (CLI) and `src/edas/dashboard/app.py` (Web UI). They *drive* the application.
+    * **Secondary Adapters (Driven):** `src/edas/ingestion/entsoe_client.py` (the ENTSO-E API adapter) and `src/edas/ingestion/upsert.py` (the PostgreSQL database adapter). They are *driven by* the application.
+
+---
+
+### Infrastructure
+
+The system is composed of the following infrastructural components:
+
+1.  **Clients:**
+    * A **CLI Client** (`edas-ingest`) for the Data Engineer.
+    * A **Web Browser** for the Energy Analyst.
+2.  **Application Servers:**
+    * A **Python Server (Dash)** (`edas-dashboard`) which runs `app.py` to serve the interactive web dashboard.
+3.  **Databases:**
+    * A **PostgreSQL Database** serves as the single source of truth for all time-series data.
+4.  **External Services:**
+    * The **ENTSO-E API**, which is the external data source.
+
+#### Distribution and Naming
+
+* **Distribution:** In a production environment, the Python Application (Dash) and the PostgreSQL database would run on separate, dedicated servers within the same private network (e.g., in the cloud). The ENTSO-E API is an external service located on the internet.
+* **Naming/Discovery:** Components (like the database) are found via environment variables (e.g., `PGHOST`, `PGPORT`) which are loaded by `config.py` and `connection.py` from the `.env` file.
+
+---
+
+### Modelling
+
+#### Domain-Driven Design (DDD) Modelling
+
+* **Bounded Contexts:** The system is split into two distinct Bounded Contexts that only communicate via the database:
+    1.  **Ingestion Context:** (Write-only) Responsible for fetching, transforming, and persisting data. Its Ubiquitous Language includes terms like `fetch_production`, `upsert`, `zone_key`, `to_utc_naive`.
+    2.  **Analytics Context:** (Read-only) Responsible for querying, aggregating, and visualizing data. Its Language includes `KPIs`, `production_mix`, `net_balance`, `daily_summary`.
+* **Domain Concepts (Entities, Repositories, Services):**
+    * **Entities:** The core domain entities are implicitly modeled by the `pandas.DataFrame` structures and explicitly defined by the PostgreSQL schema (`01_schema.sql`): `countries`, `energy_consumption`, `energy_production`, `cross_border_flow`.
+    * **Value Objects:** Concepts like `country_code`, `time_stamp`, and `source_type` act as Value Objects that define the identity of the data.
+    * **Repositories:** The **Repository Pattern** is explicitly implemented in `src/edas/ingestion/upsert.py`. This module encapsulates all database write logic, particularly the `INSERT ON CONFLICT` (Upsert) strategy, hiding it from the pipeline.
+    * **Application Services:** The `src/edas/pipeline.py` file acts as the Application Service, orchestrating calls to the adapters (Client and Repository).
+
+#### Object-Oriented Modelling (UML Class Diagram)
+
+<img width="1818" height="1504" alt="Untitled diagram-2025-11-16-102830" src="https://github.com/user-attachments/assets/04a709e5-5f27-40bb-8354-d036798fe55b" />
+
+
+This diagram shows the main data entities (based on `01_schema.sql`) and their "1-to-N" relationships.
+
+---
+
+### Interaction
+
+* **Component Communication:** The two Bounded Contexts (Ingestion and Analytics) are fully decoupled. They do not communicate directly.
+    * The **Ingestion Context** (`pipeline.py`) **writes** to the PostgreSQL database.
+    * The **Analytics Context** (`dashboard/queries.py`) **reads** from the PostgreSQL database.
+    This asynchronous, database-centric communication pattern ensures high availability; the dashboard can still serve data even if the ingestion pipeline is temporarily down.
+
+* **Interaction Patterns (UML Sequence Diagrams):**
+* 
+<img width="3693" height="2986" alt="Untitled diagram-2025-11-16-112431" src="https://github.com/user-attachments/assets/853c6eff-1c9c-450d-99ad-8831e0c841dd" />
+
+
+    **Dashboard (`edas-dashboard`):** This diagram shows the flow when the Energy Analyst loads the dashboard or changes a filter.
+
+  <img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/ec3318ba-eae3-41df-af29-33f1ed239347" />
+   
+---
+
+### Behaviour
+
+* **Component Behaviour:**
+    * The **Ingestion Pipeline** (`pipeline.py`) is **stateful during execution** (it loads metadata, computes a date range, and fetches data) but **stateless between runs**.
+    * The **Dashboard** (`app.py`) is **stateless**. It relies on Dash callbacks, which re-query the database (`queries.py`) every time a user interaction (like changing a filter) occurs.
+* **State Update:**
+    * The **State** of the system is the data stored in the PostgreSQL database.
+    * Only the **Ingestion Context** (specifically `upsert.py`) is allowed to **write or modify** this state.
+    * The **Analytics Context** (`queries.py`) is strictly **Read-Only**.
+
+---
+
+### Data-related Aspects
+
+* **Data Stored:** Yes. Time-series data for energy consumption, production by source, and cross-border flows, as well as metadata for countries (`countries` table).
+* **Storage Model:** A **Relational (SQL)** model was chosen (PostgreSQL).
+    * **Justification:** The data is highly structured, tabular (time-series), and the relationships between tables (e.g., `energy_consumption` -> `countries`) are critical. A relational database is ideal for the complex `JOIN` and `GROUP BY` aggregations required by the `queries.py` analytics module.
+* **Query Responsibility:**
+    * **Writes (UPSERT):** `src/edas/ingestion/upsert.py`.
+    * **Reads (SELECT):** `src/edas/dashboard/queries.py` (for analytics) and `src/edas/pipeline.py` (for metadata).
+* **Concurrency:**
+    * **Concurrent Writes:** Handled atomically by the `INSERT ON CONFLICT` (Upsert) mechanism in `upsert.py`. This ensures that even if two pipelines run simultaneously, data integrity is maintained (Idempotency, **NFR1**).
+    * **Concurrent Reads:** Handled by PostgreSQL's standard MVCC (Multiversion Concurrency Control). Analysts reading the dashboard will not block the ingestion pipeline.
 - Are there **infrastructural components** that need to be introduced? Which and **how many** of each?
     - e.g. **clients**, **servers**, **load balancers**, **caches**, **databases**, **message brokers**, **queues**, **workers**, **proxies**, **firewalls**, **CDNs**, etc.
 - How do components **distribute** over the network? **Where** are they located?
