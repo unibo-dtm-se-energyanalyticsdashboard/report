@@ -8,7 +8,7 @@ nav_order: 5
 
 ### DVCS (Distributed Version Control)
 
-This project was managed entirely using Git and GitHub, adhering to modern DVCS conventions as required by the course slides (`03-dvcs-basics.pdf`, `06-versioning.pdf`) and the evaluation checklist.
+This project was managed entirely using Git and GitHub.
 
 * **Branching Convention:** We adopted a simplified **GitFlow** model to manage development:
     * `master` (or `main`): This branch is kept stable and protected. All production releases (e.g., `v0.2.0`) are tagged and merged into this branch.
