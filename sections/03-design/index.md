@@ -89,7 +89,7 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
 
 * **Dashboard (`edas-dashboard`):** This diagram shows the flow when the Energy Analyst loads the dashboard or changes a filter.
 
-  <img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/ec3318ba-eae3-41df-af29-33f1ed239347" />
+<img width="2631" height="1906" alt="Untitled diagram-2025-11-16-112644" src="https://github.com/user-attachments/assets/ec3318ba-eae3-41df-af29-33f1ed239347" />
    
 ---
 
