@@ -8,13 +8,15 @@ nav_order: 6
 
 ### Testing Approach
 
+### Testing Approach
+
 My testing strategy was not a strict "Test-Driven Development (TDD)" approach, as the core features were implemented first. Instead, I followed a **Test-After Development** methodology, which is crucial for validation and ensuring long-term maintainability.
 
 The goal was to create a "safety net" of tests that validate the system at different levels, allowing for safe refactoring and future development.
 
 **Testing Frameworks Used:**
 * **`unittest`:** I used Python's built-in `unittest` library as the base framework for writing all my test cases (e.g., `TestPipelineSmoke(unittest.TestCase)`). It is robust and requires no external dependencies for basic tests.
-* **`pytest`:** I used `pytest` as the test runner (via `poe.tasks`). `pytest` has a superior test discovery mechanism and integrates seamlessly with plugins like `coverage`.
+* **`pytest`:** I used `pytest` (defined in `pyproject.toml`) as the primary test runner, executed via the `poe test` task. `pytest` has a superior test discovery mechanism and integrates seamlessly with plugins like `coverage`.
 * **`unittest.mock`:** This was essential for my Integration tests to create **Test Doubles (Mocks)**.
 
 ---
@@ -29,17 +31,17 @@ My automated testing strategy is divided into three distinct levels, as defined 
 * **Implementation (`tests/test_pipeline_unit.py`):**
     * **Rationale:** The `_compute_range` function in `pipeline.py` contains critical, time-sensitive business logic for defining the ingestion window. A bug here could lead to missing data or incorrect API calls.
     * **Test Cases:**
-        * `test_last_10_days_dynamic_now`: Verifies the default (`last_10_days`) mode correctly calculates a dynamic 10-day window relative to the current time. (Covers **FR1, FR2, FR3**).
-        * `test_full_2025_range`: Verifies the project-specific (`full_2025`) mode returns the exact, hardcoded start and end timestamps for the 2025 calendar year. (Covers **FR1, FR2, FR3**).
-        * `test_invalid_mode_raises`: Verifies that the function fails fast by raising a `ValueError` if an unknown mode is supplied. (Covers **NFR3**).
+        * `test_last_10_days_dynamic_now`: Verifies the default (`last_10_days`) mode correctly calculates a dynamic 10-day window relative to the current time. (Covers **US2**, **FR1**).
+        * `test_full_2025_range`: Verifies the project-specific (`full_2025`) mode returns the exact, hardcoded start and end timestamps. (Covers **US1**, **FR1**).
+        * `test_invalid_mode_raises`: Verifies that the function fails fast by raising a `ValueError` if an unsupported mode is supplied. (Covers **NFR3**).
 * **Future Work (Missing Tests):** A more comprehensive unit test suite would also include isolated tests for:
-    * `entsoe_client.py` -> `to_utc_naive()` to validate timestamp conversions.
-    * `entsoe_client.py` -> `_flatten_columns()` to validate the DataFrame transformation logic.
-    * `upsert.py` -> Mocking the `raw_conn` and `pg_extras` to verify that the correct SQL and data tuples are generated, without touching a database.
+    * `entsoe_client.py` -> `to_utc_naive()` to validate timestamp conversions. (Covers **FR4**)
+    * `entsoe_client.py` -> `_flatten_columns()` to validate the DataFrame transformation logic. (Covers **FR2**)
+    * `upsert.py` -> Mocking the `raw_conn` and `pg_extras` to verify that the correct SQL and data tuples are generated, without touching a database. (Covers **FR5**)
 
 #### 2. Integration Testing
 
-* **Description:** This level tests the *orchestration* of multiple components working together, as defined in the Hexagonal Architecture (Design section). We test that the "Application Service" (`pipeline.py`) correctly interacts with its "Ports" (the adapters).
+* **Description:** This level tests the *orchestration* of multiple components working together, as defined in our Hexagonal Architecture (Design section). We test that the "Application Service" (`pipeline.py`) correctly interacts with its "Ports" (the adapters).
 * **Implementation (`tests/test_pipeline_smoke.py`):**
     * **Rationale:** This test validates the *entire* `run_pipeline` function (our Application Service) without the cost or instability of real network calls or a live database.
     * **Test Doubles (Mocks):** This test relies heavily on **Test Doubles** (specifically, **Mocks** using `unittest.mock.patch`). We "patch out" (replace) all external infrastructure:
