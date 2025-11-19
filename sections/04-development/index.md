@@ -6,7 +6,7 @@ nav_order: 5
 
 # Development
 
-### DVCS (Distributed Version Control)
+## DVCS (Distributed Version Control)
 
 This project was managed entirely using Git and GitHub.
 
@@ -21,7 +21,7 @@ This project was managed entirely using Git and GitHub.
 
 ---
 
-### Implementation Details
+## Implementation Details
 
 #### Network Protocols
 
@@ -57,7 +57,7 @@ This project was managed entirely using Git and GitHub.
 
 ---
 
-### Technological Details
+## Technological Details
 
 #### Core Technologies
 
