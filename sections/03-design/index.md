@@ -8,8 +8,6 @@ nav_order: 4
 
 ### Architecture
 
-#### Architectural Style
-
 The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**).
 
 **Justification (Why):**
