@@ -8,10 +8,10 @@ nav_order: 1
 # Energy Data Analytics System (EDAS)
 
 
-# Authors
+## Authors
 - Romina Gharehmohammadi (romi.gharehmohammadi@studio.unibo.it)
 
-# Abstract
+## Abstract
 The Energy Data Analytics System (EDAS) is a software solution designed to ingest, store, process, and visualize energy data provided by the ENTSO-E Transparency Platform.  
 Its primary purpose is to support exploratory data analysis, allowing users to examine electricity consumption, production, and cross-border flows across European countries.
 
@@ -23,7 +23,7 @@ The system features:
 
 The project emphasizes clean software engineering principles, including modular design, static analysis (mypy), automated testing, CI/CD pipelines, secure configuration through environment variables, and reproducible deployment.
 
-# Disclaimer on the use of AI tools
+### Disclaimer on the use of AI tools
 During the preparation of this work, the author used *ChatGPT* to support:
 - clarification of software engineering concepts,
 - debugging assistance,
