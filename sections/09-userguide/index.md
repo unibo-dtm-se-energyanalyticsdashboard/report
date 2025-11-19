@@ -6,30 +6,30 @@ nav_order: 10
 
 # User Guide
 
-## **1. Running the Data Ingestion Pipeline**
+## 1. Running the Data Ingestion Pipeline
 
 The ingestion pipeline downloads electricity data from ENTSO-E and stores it in the PostgreSQL database.
 
-### **Available Modes**
+### Available Modes
 
 * **Last 10 Days (default)**
   Downloads recent hourly data for the selected countries.
 * **Full 2025**
   Downloads the entire 2025 dataset (slow, large dataset).
 
-### **Basic Command**
+### Basic Command
 
 ```bash
 poetry run python artifact/scripts/ingest.py --countries FR DE
 ```
 
-### **Full-year mode**
+### Full-year mode
 
 ```bash
 poetry run python artifact/scripts/ingest.py --mode full_2025 --countries FR DE
 ```
 
-### **Skip cross-border flows**
+### Skip cross-border flows
 
 ```bash
 poetry run python artifact/scripts/ingest.py --no-flows
@@ -39,17 +39,17 @@ After execution, the pipeline prints progress logs (consumption, production, flo
 
 ---
 
-## **2. Running the Dashboard**
+## 2. Running the Dashboard
 
 The dashboard provides the graphical interface for exploring the stored data.
 
-### **Start the dashboard**
+### Start the dashboard
 
 ```bash
 poetry run python -m src.edas.dashboard.app
 ```
 
-### **Access the interface**
+### Access the interface
 
 Open the browser and navigate to:
 
@@ -57,7 +57,7 @@ Open the browser and navigate to:
 http://127.0.0.1:8050
 ```
 
-### **Dashboard Features**
+### Dashboard Features
 
 * **Country Selector** — choose one or multiple countries (FR, DE, …).
 * **Date Range Picker** — select custom time windows.
@@ -79,7 +79,7 @@ Screens update automatically when filters change.
 
 ---
 
-## **3. Configuration Required by the User**
+## 3. Configuration Required by the User
 
 Users must ensure their `.env` file contains valid settings:
 
@@ -92,18 +92,18 @@ DB_NAME=energy_analytics
 ENTSOE_API_KEY=your_api_key
 ```
 
-### **Where to place the `.env` file**
+### Where to place the `.env` file
 
 At the project root (same level as `pyproject.toml`).
 
-### **Important**
+### Important
 
 * The ENTSO-E API key must be valid.
 * PostgreSQL must be running before ingestion or dashboard execution.
 
 ---
 
-## **4. Log Files**
+## 4. Log Files
 
 The system writes logs to:
 
@@ -119,7 +119,7 @@ The log file rotates automatically to avoid excessive size and provides:
 
 ---
 
-## **5. Typical User Workflow**
+## 5. Typical User Workflow
 
 1. Ensure PostgreSQL is running.
 2. Ensure `.env` contains valid credentials + API key.
@@ -137,9 +137,9 @@ The log file rotates automatically to avoid excessive size and provides:
 
 ---
 
-## **6. Error Handling and Troubleshooting**
+## 6. Error Handling and Troubleshooting
 
-### **Missing API key**
+### Missing API key
 
 You will see:
 
@@ -149,13 +149,13 @@ Missing required environment variable: ENTSOE_API_KEY
 
 Fix by adding the key to `.env`.
 
-### **Database connection error**
+### Database connection error
 
 Ensure:
 
 * PostgreSQL is running
 * User/password in `.env` match your local DB
 
-### **No data shown on dashboard**
+### No data shown on dashboard
 
 Make sure ingestion ran successfully before launching the dashboard.
