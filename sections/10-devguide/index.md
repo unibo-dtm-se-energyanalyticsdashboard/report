@@ -6,10 +6,6 @@ nav_order: 11
 
 # Developer Guide
 
-This section explains how a new contributor can join the project, understand its structure, and start contributing effectively.
-
----
-
 ## **1. Team & Communication**
 
 * **Project Repository:** GitHub (inside the project organization).
