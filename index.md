@@ -7,21 +7,28 @@ nav_order: 1
 
 # Project title
 
-### Authors
+Energy Data Analytics System (EDAS)
 
-- [Giovanni Ciatto](mailto:giovanni.ciatto@unibo.it)
-- [Davide Domini](mailto:davide.domini@unibo.it)
+# Authors
+- Romina Gharehmohammadi (romi.gharehmohammadi@studio.unibo.it)
 
-## Abstract
+# Abstract
+The Energy Data Analytics System (EDAS) is a software solution designed to ingest, store, process, and visualize energy data provided by the ENTSO-E Transparency Platform.  
+Its primary purpose is to support exploratory data analysis, allowing users to examine electricity consumption, production, and cross-border flows across European countries.
 
-(~ 2000 characters)
+The system features:
+- an automated ingestion pipeline that retrieves updated time-series from ENTSO-E,
+- a PostgreSQL database to store normalized historical datasets,
+- a dashboard interface for querying aggregated indicators,
+- a modular architecture supporting extension and additional analytics.
 
-Here you should briefly explain what the project is about.
+The project emphasizes clean software engineering principles, including modular design, static analysis (mypy), automated testing, CI/CD pipelines, secure configuration through environment variables, and reproducible deployment.
 
-## Disclaimer (if needed)
+# Disclaimer on the use of AI tools
+During the preparation of this work, the author used *ChatGPT* to support:
+- clarification of software engineering concepts,
+- debugging assistance,
+- improving English phrasing in documentation
 
-During the preparation of this work, the author(s) used [NAME TOOL / SERVICE] to [REASON].
-
-After using this tool/service, the author(s) reviewed and edited the content as needed
-and take(s) full responsibility for the content of the final report/artifact.
+After using this tool, I carefully reviewed, verified, and edited all content.  
 
