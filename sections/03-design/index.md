@@ -6,7 +6,7 @@ nav_order: 4
 
 # Design
 
-### Architecture
+## Architecture
 
 The architectural style chosen for this project is the **Hexagonal Architecture** (also known as **Ports & Adapters**).
 
@@ -30,7 +30,7 @@ The system is designed with a clear separation between the "Core Application" an
 
 ---
 
-### Infrastructure
+## Infrastructure
 
 The system is composed of the following infrastructural components:
 
@@ -51,7 +51,7 @@ The system is composed of the following infrastructural components:
 
 ---
 
-### Modelling
+## Modelling
 
 #### Domain-Driven Design (DDD) Modelling
 
@@ -73,7 +73,7 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
 
 ---
 
-### Interaction
+## Interaction
 
 * **Component Communication:** The two Bounded Contexts (Ingestion and Analytics) are fully decoupled. They do not communicate directly.
     * The **Ingestion Context** (`pipeline.py`) **writes** to the PostgreSQL database.
@@ -91,7 +91,7 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
 
 ---
 
-### Behaviour
+## Behaviour
 
 * **Component Behaviour:**
     * The **Ingestion Pipeline** (`pipeline.py`) is **stateful during execution** (it loads metadata, computes a date range, and fetches data) but **stateless between runs**.
@@ -103,7 +103,7 @@ This diagram shows the main data entities (based on `01_schema.sql`) and their "
 
 ---
 
-### Data-related Aspects
+## Data-related Aspects
 
 * **Data Stored:** Yes. Time-series data for energy consumption, production by source, and cross-border flows, as well as metadata for countries (`countries` table).
 * **Storage Model:** A **Relational (SQL)** model was chosen (PostgreSQL).
