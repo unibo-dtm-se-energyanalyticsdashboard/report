@@ -6,7 +6,7 @@ nav_order: 6
 
 # Validation
 
-### Testing Approach
+## Testing Approach
 
 My testing strategy was not a strict "Test-Driven Development (TDD)" approach, as the core features were implemented first. Instead, I followed a **Test-After Development** methodology, which is crucial for validation and ensuring long-term maintainability.
 
@@ -19,7 +19,7 @@ The goal was to create a "safety net" of tests that validate the system at diffe
 
 ---
 
-### Testing (Automated)
+## Testing (Automated)
 
 My automated testing strategy is divided into three distinct levels, as defined in the `tests/` directory and executed by the `check.yml` CI pipeline.
 
@@ -76,7 +76,7 @@ My automated testing strategy is divided into three distinct levels, as defined 
 
 ---
 
-### Acceptance Tests (Manual)
+## Acceptance Tests (Manual)
 
 In addition to automated tests, manual acceptance tests were performed to validate the end-to-end user experience, matching the acceptance criteria in the **Requirements** section.
 
