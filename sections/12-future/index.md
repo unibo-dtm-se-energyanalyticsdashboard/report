@@ -13,7 +13,7 @@ nav_order: 13
 * **Static type checking warnings:** Some Dash components trigger mypy warnings due to library-level typing issues.
 
 
-## **Missing Features**
+## Missing Features
 
 * **Authentication / user management:** The dashboard is public locally; no login or authorization mechanism is implemented.
 * **Automated deployment:** Releases are automated, but the application itself is not deployed on a server (e.g., Docker, cloud hosting, or a managed service).
@@ -21,7 +21,7 @@ nav_order: 13
 * **Front-end polish:** Some visual elements are basic and could be refined (styling, animations, responsiveness).
 
 
-## **Future Work**
+## Future Work
 
 * **Add full unit tests & integration tests** for ingestion, database operations, and dashboard callbacks.
 * **Implement caching or incremental ingestion** to reduce API calls and improve performance.
