@@ -200,7 +200,6 @@ poetry run python -m edas.dashboard.app
 
 Or use a systemd service for automatic startup.
 
----
 
 ## **Server-Side External Dependencies**
 
@@ -213,5 +212,3 @@ The system requires a **PostgreSQL** instance with the schema defined in `sql/01
 The ingestion pipeline depends on the **ENTSO-E Transparency Platform API**.
 A valid API key must be provided via environment variables.
 
-
----
