@@ -6,10 +6,6 @@ nav_order: 10
 
 # User Guide
 
-This section explains how an end-user can run the Energy Analytics Dashboard after installation and deployment. The guide assumes that the software, dependencies, and database have already been configured correctly.
-
----
-
 ## **1. Running the Data Ingestion Pipeline**
 
 The ingestion pipeline downloads electricity data from ENTSO-E and stores it in the PostgreSQL database.
