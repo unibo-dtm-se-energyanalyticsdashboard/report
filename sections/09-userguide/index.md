@@ -37,7 +37,6 @@ poetry run python artifact/scripts/ingest.py --no-flows
 
 After execution, the pipeline prints progress logs (consumption, production, flows) and writes them to `logs/app.log`.
 
----
 
 ## 2. Running the Dashboard
 
@@ -77,7 +76,6 @@ http://127.0.0.1:8050
 
 Screens update automatically when filters change.
 
----
 
 ## 3. Configuration Required by the User
 
@@ -101,7 +99,6 @@ At the project root (same level as `pyproject.toml`).
 * The ENTSO-E API key must be valid.
 * PostgreSQL must be running before ingestion or dashboard execution.
 
----
 
 ## 4. Log Files
 
@@ -117,7 +114,6 @@ The log file rotates automatically to avoid excessive size and provides:
 * WARNING logs for API retries
 * ERROR logs if ingestion fails
 
----
 
 ## 5. Typical User Workflow
 
@@ -135,7 +131,6 @@ The log file rotates automatically to avoid excessive size and provides:
    ```
 5. Explore the charts and KPIs in the browser.
 
----
 
 ## 6. Error Handling and Troubleshooting
 
