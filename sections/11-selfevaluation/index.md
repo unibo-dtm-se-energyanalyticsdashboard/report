@@ -20,7 +20,6 @@ My role covered:
 
 I also managed the debugging, refactoring, and quality improvements across all modules.
 
----
 
 ## **Strengths**
 
@@ -31,7 +30,6 @@ I also managed the debugging, refactoring, and quality improvements across all m
 * **Clear documentation**: Produced complete user, developer, and system documentation.
 * **Adaptability**: Adjusted project structure to align with the professor’s template while maintaining functionality.
 
----
 
 ## **Weaknesses**
 
@@ -41,7 +39,6 @@ I also managed the debugging, refactoring, and quality improvements across all m
 * **Limited test coverage**: Only basic smoke tests implemented; more unit tests could be added.
 * **Dashboard design iterations** took longer than expected because of UX decisions and API data inconsistencies.
 
----
 
 ## **Overall Assessment**
 
