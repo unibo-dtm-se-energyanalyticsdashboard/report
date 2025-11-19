@@ -217,10 +217,5 @@ The system requires a **PostgreSQL** instance with the schema defined in `sql/01
 The ingestion pipeline depends on the **ENTSO-E Transparency Platform API**.
 A valid API key must be provided via environment variables.
 
-### **Optional Components**
-
-* **Docker Compose** for unified deployment of the dashboard + database
-* **Nginx** reverse proxy for hosting the dashboard publicly
-* **GitHub Actions Deployment Workflow** for automated server updates (if configured)
 
 ---
