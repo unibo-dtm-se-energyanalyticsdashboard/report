@@ -8,7 +8,7 @@ nav_order: 8
 
 ## User Installation
 
-### **Does the user need to install something?**
+### Does the user need to install something?
 
 Yes. The user must install:
 
@@ -17,9 +17,9 @@ Yes. The user must install:
 3. Optional: **Git**, to clone the repository
 4. Optional: **Docker**, if the user prefers containerized execution
 
-### **Installation Steps**
+### Installation Steps
 
-#### **1. Install Python**
+#### 1. Install Python
 
 The software requires Python 3.10 or newer.
 The official installer can be downloaded from:
@@ -31,7 +31,7 @@ Verify installation:
 python --version
 ```
 
-#### **2. Install Poetry**
+#### 2. Install Poetry
 
 Poetry manages dependencies and creates an isolated virtual environment.
 
@@ -45,7 +45,7 @@ Verify:
 poetry --version
 ```
 
-#### **3. Install the Project Dependencies**
+#### 3. Install the Project Dependencies
 
 From the project root directory:
 
@@ -55,7 +55,7 @@ poetry install
 
 This creates the virtual environment and installs all required libraries (pandas, SQLAlchemy, entsoe-py, etc.).
 
-#### **4. Configure Environment Variables**
+#### 4. Configure Environment Variables
 
 The user must create a `.env` file in the root directory:
 
@@ -71,7 +71,7 @@ DB_NAME=energy_analytics
 
 A template `.env.example` is provided.
 
-#### **5. Initialize the Database Schema**
+#### 5. Initialize the Database Schema
 
 The project requires a PostgreSQL database.
 
@@ -94,7 +94,7 @@ Then apply schema:
 docker exec -i energy-db psql -U postgres < sql/01_schema.sql
 ```
 
-#### **6. Run the Ingestion Pipeline**
+#### 6. Run the Ingestion Pipeline
 
 To fetch ENTSO-E data:
 
@@ -102,7 +102,7 @@ To fetch ENTSO-E data:
 poetry run python scripts/ingest.py --countries FR DE
 ```
 
-#### **7. Run the Dashboard**
+#### 7. Run the Dashboard
 
 ```bash
 poetry run python -m edas.dashboard.app
@@ -110,13 +110,13 @@ poetry run python -m edas.dashboard.app
 
 ---
 
-## **Server-Side Installation**
+## Server-Side Installation
 
-### **Does the software need to be installed on a server?**
+### Does the software need to be installed on a server?
 
 Yes, if the system is intended to run scheduled ingestion jobs or expose the dashboard to multiple users.
 
-### **Server Requirements**
+### Server Requirements
 
 A server (Linux recommended) must have:
 
@@ -127,7 +127,7 @@ A server (Linux recommended) must have:
 * Git (recommended)
 * Optional: Docker or Kubernetes for containerized deployment
 
-### **1. Install System Dependencies**
+### 1. Install System Dependencies
 
 ```bash
 sudo apt update
@@ -135,20 +135,20 @@ sudo apt install python3 python3-pip postgresql git
 pip install poetry
 ```
 
-### **2. Clone the Repository**
+### 2. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd artifact   # or your project folder
 ```
 
-### **3. Install Software**
+### 3. Install Software
 
 ```bash
 poetry install
 ```
 
-### **4. Configure Server Environment Variables**
+### 4. Configure Server Environment Variables
 
 Set them permanently:
 
@@ -167,7 +167,7 @@ Or store them safely in:
 /etc/environment
 ```
 
-### **5. Configure PostgreSQL**
+### 5. Configure PostgreSQL
 
 If using Docker:
 
@@ -182,7 +182,7 @@ Apply schema:
 docker exec -i energy-db psql -U postgres < sql/01_schema.sql
 ```
 
-### **6. Configure Scheduled Pipeline Execution**
+### 6. Configure Scheduled Pipeline Execution
 
 Example cron job (runs ingestion every night at 03:00):
 
@@ -190,7 +190,7 @@ Example cron job (runs ingestion every night at 03:00):
 0 3 * * * cd /home/user/artifact && poetry run python scripts/ingest.py >> cron.log 2>&1
 ```
 
-### **7. Deploy the Dashboard**
+### 7. Deploy the Dashboard
 
 Run manually:
 
@@ -201,13 +201,13 @@ poetry run python -m edas.dashboard.app
 Or use a systemd service for automatic startup.
 
 
-## **Server-Side External Dependencies**
+## Server-Side External Dependencies
 
-### **Database**
+### Database
 
 The system requires a **PostgreSQL** instance with the schema defined in `sql/01_schema.sql`.
 
-### **External API**
+### External API
 
 The ingestion pipeline depends on the **ENTSO-E Transparency Platform API**.
 A valid API key must be provided via environment variables.
