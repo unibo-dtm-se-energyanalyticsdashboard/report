@@ -12,7 +12,6 @@ nav_order: 13
 * **Dashboard performance on large time ranges:** Plotly Dash becomes slower when loading large datasets (e.g., entire year). No caching layer is implemented yet.
 * **Static type checking warnings:** Some Dash components trigger mypy warnings due to library-level typing issues.
 
----
 
 ## **Missing Features**
 
@@ -21,7 +20,6 @@ nav_order: 13
 * **Comprehensive error reporting UI:** The dashboard does not show error messages or validation to the end user when data is missing.
 * **Front-end polish:** Some visual elements are basic and could be refined (styling, animations, responsiveness).
 
----
 
 ## **Future Work**
 
