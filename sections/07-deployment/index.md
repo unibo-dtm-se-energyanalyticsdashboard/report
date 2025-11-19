@@ -6,7 +6,7 @@ nav_order: 8
 
 # Deployment
 
-## **User Installation**
+**User Installation**
 
 ### **Does the user need to install something?**
 
