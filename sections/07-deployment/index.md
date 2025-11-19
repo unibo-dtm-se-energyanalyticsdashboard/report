@@ -6,10 +6,6 @@ nav_order: 8
 
 # Deployment
 
-This section describes all the operations required to run the software on a user's machine and, if applicable, on a server. The deployment process covers user-side installation, configuration, and all server-side requirements such as databases or API keys.
-
----
-
 ## **User Installation**
 
 ### **Does the user need to install something?**
