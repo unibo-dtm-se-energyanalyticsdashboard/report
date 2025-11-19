@@ -8,7 +8,7 @@ nav_order: 9
 
 The project uses an automated CI/CD pipeline based on **GitHub Actions** to guarantee code quality, reproducibility, and reliable deployment.
 
-## **What is Automated?**
+## What is Automated?
 
 * Installation of dependencies using **Poetry**.
 * Syntax validation and static type checking via `compileall` and **mypy**.
@@ -17,7 +17,7 @@ The project uses an automated CI/CD pipeline based on **GitHub Actions** to guar
 * Testing across multiple Python versions (3.10–3.13).
 * Automatic release generation (semantic versioning) and optional publishing to PyPI.
 
-## **Why Automation?**
+## Why Automation?
 
 * Ensures consistent and reproducible builds independent of developer machines.
 * Detects errors early and prevents merging broken code.
@@ -25,7 +25,7 @@ The project uses an automated CI/CD pipeline based on **GitHub Actions** to guar
 * Improves security by preventing exposure of API keys or database credentials.
 * Reduces manual work and eliminates human error in deployment and versioning.
 
-## **How Does It Work?**
+## How Does It Work?
 
 Workflows are defined in:
 
@@ -45,7 +45,7 @@ Each workflow includes:
 * Upload of coverage artifacts
 * (Optional) semantic-release for automated tagging and release creation
 
-## **Secrets and Environment Variables**
+## Secrets and Environment Variables
 
 CI loads sensitive values using **GitHub Secrets**, never stored in the repository:
 
