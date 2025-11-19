@@ -6,7 +6,7 @@ nav_order: 7
 
 # Release
 
-### Artefacts and Repositories
+## Artefacts and Repositories
 
 The project produces **one primary software artefact**: the Python package named **`edas`** (`unibo-dtm-se-energyanalyticsdashboard`).
 
@@ -19,7 +19,7 @@ This single artefact is built into two standard distribution formats and is conf
     1.  **PyPI / TestPyPI:** The final destination for the package, making it globally installable via `pip`. TestPyPI is used for dry-run testing before deployment to the official PyPI.
     2.  **GitHub Releases:** The CI/CD pipeline uploads the compiled artefact files (`.whl` and `.tar.gz`) directly to the GitHub Releases page, creating a versioned history of deliverables.
 
-### Release Process
+## Release Process
 
 The release process is **100% fully automated** using the Node.js tool **`semantic-release`** (configured in `release.config.mjs`) and executed by the **`deploy.yml` GitHub Actions workflow**. This automation ensures consistency and adherence to versioning rules.
 
@@ -34,7 +34,7 @@ The release process is **100% fully automated** using the Node.js tool **`semant
         ```
     5.  **Post-Release:** It creates the Git Tag (`vX.Y.Z`), generates the **`CHANGELOG.md`** file, and commits these changes back to the repository using the authorized GitHub Token.
 
-### Choice of the Versioning Schema
+## Choice of the Versioning Schema
 
 The project uses **Semantic Versioning (SemVer)** (format: `MAJOR.MINOR.PATCH`).
 
@@ -45,7 +45,7 @@ The project uses **Semantic Versioning (SemVer)** (format: `MAJOR.MINOR.PATCH`).
     * **MAJOR:** Incremented by any commit containing `BREAKING CHANGE:` in the body or footer (incompatible changes).
 * **Artefact Alignment:** All generated artefacts (the Python package files, the GitHub Tag, and the `CHANGELOG.md` entry) share the exact **same version number** to ensure consistency across the release lifecycle.
 
-### Choice of the License
+## Choice of the License
 
 * **License Chosen:** **Apache License 2.0** (full text in the `LICENSE` file and declared in `pyproject.toml`).
 * **Justification:** This choice is made because it is a **permissive** (non-copyleft) license that is compatible with the licenses of our main dependencies (`pandas`, `dash`, etc.). Crucially, it allows for widespread use while including an explicit **Patent Grant** and protecting against patent claims, making it suitable for a data analytics tool.
