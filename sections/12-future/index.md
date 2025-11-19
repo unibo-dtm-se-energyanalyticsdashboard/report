@@ -6,6 +6,7 @@ nav_order: 13
 
 # Known issues and future work
 
+
 * **Limited test coverage:** Only smoke tests and minimal unit tests are implemented. Edge cases, failure modes, and dashboard logic are not fully tested.
 * **API rate-limit sensitivity:** The ENTSO-E API occasionally returns connection reset errors when many requests are made in a short time. The retry logic works but is not always sufficient.
 * **Timezone inconsistencies:** Although handled carefully, the ENTSO-E data contains inconsistent timestamps in rare cases, which may lead to small misalignments in visualizations.
