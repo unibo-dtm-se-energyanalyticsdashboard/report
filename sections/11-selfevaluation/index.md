@@ -6,7 +6,7 @@ nav_order: 12
 
 # Self-evaluation
 
-## **Role in the Project**
+## Role in the Project
 
 I was responsible for the full end-to-end implementation of the Energy Analytics Dashboard.
 My role covered:
@@ -21,7 +21,7 @@ My role covered:
 I also managed the debugging, refactoring, and quality improvements across all modules.
 
 
-## **Strengths**
+## Strengths
 
 * **Strong ownership of the entire pipeline**: I designed and implemented all ETL steps, dashboard UI, and database interactions.
 * **Robust CI/CD integration**: Setup of automated linting, mypy, tests, and semantic-release.
@@ -31,7 +31,7 @@ I also managed the debugging, refactoring, and quality improvements across all m
 * **Adaptability**: Adjusted project structure to align with the professor’s template while maintaining functionality.
 
 
-## **Weaknesses**
+## Weaknesses
 
 * **Initial project structure mistakes** (e.g., wrong package naming) required later corrections.
 * **Spent too much time refactoring** instead of focusing earlier on documentation.
@@ -40,7 +40,7 @@ I also managed the debugging, refactoring, and quality improvements across all m
 * **Dashboard design iterations** took longer than expected because of UX decisions and API data inconsistencies.
 
 
-## **Overall Assessment**
+## Overall Assessment
 
 I believe my contribution to the project was substantial and covered the most complex and technical components.
 The project reached a professional and stable state thanks to careful iteration, debugging, and alignment with the required template.
