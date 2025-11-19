@@ -5,9 +5,8 @@ has_children: false
 nav_order: 1
 ---
 
-# Project title
+# Energy Data Analytics System (EDAS)
 
-Energy Data Analytics System (EDAS)
 
 # Authors
 - Romina Gharehmohammadi (romi.gharehmohammadi@studio.unibo.it)
