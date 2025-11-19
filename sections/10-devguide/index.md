@@ -6,7 +6,7 @@ nav_order: 11
 
 # Developer Guide
 
-## **1. Team & Communication**
+## 1. Team & Communication
 
 * **Project Repository:** GitHub (inside the project organization).
 * **Issue Reporting:**
@@ -14,11 +14,11 @@ nav_order: 11
 * **Internal Communication:**
   New contributors should contact the team via GitHub issues or the course communication channels suggested by the instructor.
 
----
 
-## **2. Development Conventions**
 
-### **Code Style**
+## 2. Development Conventions
+
+### Code Style
 
 * Python code follows **PEP8** and **PEP484 typing**.
 * All modules must include:
@@ -28,7 +28,7 @@ nav_order: 11
   * English comments only
 * Logging uses the central logging utility (`edas.logging_config`).
 
-### **Branching & Naming**
+### Branching & Naming
 
 * **Main branches:**
 
@@ -49,30 +49,30 @@ nav_order: 11
   * `fix: correct timezone conversion`
   * `docs: update user guide`
 
----
 
-## **3. Development Environment Setup**
 
-### **Clone the project**
+## 3. Development Environment Setup
+
+### Clone the project
 
 ```bash
 git clone https://github.com/<org>/<repo>
 cd <repo>
 ```
 
-### **Install Poetry**
+### Install Poetry
 
 ```bash
 pip install poetry
 ```
 
-### **Install dependencies**
+### Install dependencies
 
 ```bash
 poetry install
 ```
 
-### **Environment Variables**
+### Environment Variables
 
 Create a `.env` file:
 
@@ -85,30 +85,29 @@ DB_NAME=energy_analytics
 ENTSOE_API_KEY=your_api_key
 ```
 
-### **Database Setup**
+### Database Setup
 
 ```bash
 bash artifact/scripts/db_init.sh
 ```
 
-### **Run Tests**
+### Run Tests
 
 ```bash
 poetry run poe test
 ```
 
-### **Run Static Checks**
+### Run Static Checks
 
 ```bash
 poetry run poe mypy
 poetry run poe compile
 ```
 
----
 
-## **4. Development Workflow**
+## 4. Development Workflow
 
-### **Creating a New Feature**
+### Creating a New Feature
 
 1. Start from the `dev` branch:
 
@@ -144,17 +143,17 @@ poetry run poe compile
    * Mention what was changed
    * Reference issues if required
 
-### **PR Requirements**
+### PR Requirements
 
 * All CI checks must pass.
 * Code must follow style conventions.
 * At least one reviewer must approve the PR.
 
----
 
-## **5. IDE & Tooling Instructions**
 
-### **Recommended IDE**
+## 5. IDE & Tooling Instructions
+
+### Recommended IDE
 
 * **Visual Studio Code** or **PyCharm**
 * Enable:
@@ -163,14 +162,14 @@ poetry run poe compile
   * Pylance or MyPy support
   * Black or autopep8 for formatting
 
-### **Recommended Tools**
+### Recommended Tools
 
 * **Poetry**: dependency, virtualenv, and scripts
 * **Poe the Poet**: task runner (`poetry run poe <task>`)
 * **GitHub Actions**: CI pipeline
 * **Docker (optional)**: for database or dashboard containerization
 
-### **Useful Commands**
+### Useful Commands
 
 Run ingestion:
 
@@ -190,28 +189,26 @@ Run coverage:
 poetry run poe coverage
 ```
 
----
 
-## **6. How to Extend the System**
+## 6. How to Extend the System
 
-### **Add a new data metric**
+### Add a new data metric
 
 * Add query logic in `src/edas/dashboard/queries.py`
 * Add UI logic in `src/edas/dashboard/app.py`
 
-### **Add a new ingestion source**
+### Add a new ingestion source
 
 * Implement new fetching logic in `edas.ingestion.entsoe_client`
 * Add new upsert function in `edas.ingestion.upsert.py`
 * Update pipeline logic in `edas.pipeline`
 
-### **Add new dashboards**
+### Add new dashboards
 
 * Add a new tab and callback in `src/edas/dashboard/app.py`
 
----
 
-## **7. Release Workflow (for developers)**
+## 7. Release Workflow (for developers)
 
 1. Merge all feature branches into `dev`.
 2. Ensure CI passes.
